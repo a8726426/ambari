@@ -139,6 +139,7 @@ public abstract class SolrDaoBase {
       @Override
       public Long doInSolr(SolrClient solrClient) throws SolrServerException, IOException {
         SolrQuery solrQuery = new DefaultQueryParser().doConstructSolrQuery(solrDataQuery);
+        SolrUtil.removeDoubleOrTripleEscapeFromFilters(solrQuery);
         solrQuery.setStart(0);
         solrQuery.setRows(0);
         QueryResponse queryResponse = solrClient.query(solrQuery);
